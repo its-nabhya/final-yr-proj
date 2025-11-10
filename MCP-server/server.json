@@ -1,0 +1,29 @@
+{
+    "mcpServers": {
+        "default-server": {
+            "command": "uv",
+            "args": [
+                "run",
+                "--with",
+                "mcp",
+                "mcp",
+                "run",
+                "MCP-server/server.py"
+            ],
+            "env": {
+                "APPDATA": "C:\\Users\\NABHYA\\AppData\\Roaming",
+                "HOMEDRIVE": "C:",
+                "HOMEPATH": "\\Users\\NABHYA",
+                "LOCALAPPDATA": "C:\\Users\\NABHYA\\AppData\\Local",
+                "PATH": "C:\\Users\\NABHYA\\AppData\\Local\\npm-cache\\_npx\\5a9d879542beca3a\\node_modules\\.bin;D:\\Code\\Projects\\final-yr-proj\\node_modules\\.bin;D:\\Code\\Projects\\node_modules\\.bin;D:\\Code\\node_modules\\.bin;D:\\node_modules\\.bin;D:\\Program Files\\NodeJS\\node_modules\\npm\\node_modules\\@npmcli\\run-script\\lib\\node-gyp-bin;D:\\Code\\Projects\\final-yr-proj\\.venv\\Scripts;D:\\Code\\Projects\\final-yr-proj\\.venv/Scripts;D:\\Program Files\\Python312\\Scripts\\;D:\\Program Files\\Python312\\;C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx86\\x86;D:\\Program Files\\Python\\Scripts\\;D:\\Program Files\\Python3.11\\Scripts;D:\\Program Files\\Python\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;D:\\Program Files\\Java\\jdk-25\\bin;D:\\Program Files\\Java\\jdk-21\\bin;C:\\Program Files\\dotnet\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR;C:\\Program Files\\Common Files\\Oracle\\Java\\javapath;D:\\Program Files\\NodeJS\\;C:\\ProgramData\\chocolatey\\bin;D:\\Program Files\\Git\\Git\\cmd;C:\\Users\\NABHYA\\.cargo\\bin;C:\\Users\\NABHYA\\.local\\bin;C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\;C:\\Users\\NABHYA\\AppData\\Local\\Microsoft\\WindowsApps;D:\\Tools\\IDEs\\Microsoft VS Code\\bin;C:\\Users\\NABHYA\\AppData\\Roaming\\npm;C:\\Users\\NABHYA\\AppData\\Local\\Programs\\Ollama;c:\\Users\\NABHYA\\.vscode\\extensions\\ms-python.debugpy-2025.14.1-win32-x64\\bundled\\scripts\\noConfigScripts;c:\\Users\\NABHYA\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand",
+                "PROCESSOR_ARCHITECTURE": "AMD64",
+                "SYSTEMDRIVE": "C:",
+                "SYSTEMROOT": "C:\\Windows",
+                "TEMP": "C:\\Users\\NABHYA\\AppData\\Local\\Temp",
+                "USERNAME": "NABHYA",
+                "USERPROFILE": "C:\\Users\\NABHYA",
+                "PROGRAMFILES": "C:\\Program Files"
+            }
+        }
+    }
+}
