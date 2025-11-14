@@ -53,11 +53,42 @@ async def run_memory_chat(config_file="MCP-server/server.json"):
         if client and client.sessions:
             await client.close_all_sessions()
 
-if __name__ == "__main__":
+async def run_evaluation_on_query(query: str):
+    load_dotenv()
+    groq_api_key = os.environ.get("GROQ_API_KEY")
+    if not groq_api_key:
+        raise ValueError("Set GROQ_API_KEY in your .env file!")
+
+    llm = ChatGroq(model="qwen/qwen3-32b")
+    client = MCPClient.from_config_file("MCP-server/server.json")
+    agent = MCPAgent(llm=llm, client=client, max_steps=5, memory_enabled=True)
+
     try:
-        asyncio.run(run_memory_chat())
-    except FileNotFoundError:
-        print(f"\n[ERROR] Config file not found: {run_memory_chat.__defaults__[0]}")
-        print("Are you sure the MCP server is running in the next terminal?")
-    except KeyboardInterrupt:
-        print("\nChat interrupted. Exiting.")
+        response = await agent.run(query)
+        # Extract tool call history for context
+        if hasattr(agent, "tool_results"):
+            context = "\n---\n".join([str(result) for result in agent.tool_results])
+        else:
+            context = "Context not found in agent."
+        return {
+            "answer": response,
+            "context": context
+        }
+    finally:
+        if client and client.sessions:
+            await client.close_all_sessions()
+
+
+if __name__ == "__main__":
+    # try:
+    #     asyncio.run(run_memory_chat())
+    # except FileNotFoundError:
+    #     print(f"\n[ERROR] Config file not found: {run_memory_chat.__defaults__[0]}")
+    #     print("Are you sure the MCP server is running in the next terminal?")
+    # except KeyboardInterrupt:
+    #     print("\nChat interrupted. Exiting.")
+    import sys
+    query = sys.argv[1] if len(sys.argv)>1 else "What is machine learning?"
+    result = asyncio.run(run_evaluation_on_query(query))
+    print("ANSWER: " ,result["answer"])
+    print("CONTEXT: " , result["context"])

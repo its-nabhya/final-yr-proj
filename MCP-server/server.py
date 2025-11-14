@@ -36,7 +36,12 @@ def fetch_wikipedia_page(query: str, summary_length: int = 1500) -> dict:
     page = wiki.page(query.title())
     if page.exists():
         summary = page.summary if summary_length is None else page.summary[:summary_length]
-        return {"result": f"**{page.title}**\n{summary}\nURL: {page.fullurl}"}
+        # return {"result": f"**{page.title}**\n{summary}\nURL: {page.fullurl}"}
+        return {
+            "title": page.title,
+            "summary": summary,
+            "url": page.fullurl
+        }
     else:
         return {"result": f"No Wikipedia page found for '{query}'."}
 
@@ -80,7 +85,8 @@ def search_wikipedia_relevance(query: str, max_results: int = 3) -> dict:
         data = r.json()
 
         results = []
-        pages = data['query']['pages']
+        # pages = data['query']['pages']
+        pages = data.get("query", {}).get("pages", {})
         
     #     for item in data.get('query', {}).get('search', []):
     #         title = item['title']
@@ -114,11 +120,15 @@ def search_wikipedia_relevance(query: str, max_results: int = 3) -> dict:
     #     return {"result": results}
     # except Exception as e:
     #     return {"result": f"Error occurred: {str(e)}"}
-        for page_id in data['query'].get('pageids', []):
-            page = pages.get(page_id, {})
-            if not page:
-                continue
-                
+      
+      
+        # for page_id in data['query'].get('pageids', []):
+        #     page = pages.get(page_id, {})
+        #     if not page:
+        #         continue
+        for pageid in pages:
+            page = pages[pageid]
+                    
             results.append({
                 'title': page.get('title', 'N/A'),
                 'summary': page.get('extract', ''),

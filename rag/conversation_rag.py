@@ -151,5 +151,39 @@ def start_chat():
         ask_question(user_input)
 
 
+def ask_question_eval(user_question):
+    print(f"--- You asked: {user_question} ---")
+    # Rewrite if needed for context
+    search_question = user_question
+    docs = retriever.invoke(search_question)
+    context = "\n\n".join([doc.page_content for doc in docs])
+    print(f"Found {len(docs)} relevant documents.")
+
+    combined_input = (
+        f"You are a helpful assistant. Answer the user's question based only on the information from these documents.\n"
+        f"Question: {user_question}\n"
+        f"Documents:\n"
+        + "\n---\n".join([doc.page_content for doc in docs])
+        + "\nIf the answer cannot be found in the provided documents, say so."
+    )
+
+    messages = [
+        SystemMessage(content="You are a helpful assistant answering based on the provided context."),
+        HumanMessage(content=combined_input)
+    ]
+    result = llm.invoke(messages)
+    answer = result.content.strip()
+    print(answer)
+    # For evaluation: return both answer and context
+    return {
+        "answer": answer,
+        "context": context
+    }
+
+
 if __name__ == "__main__":
-    start_chat()
+    # start_chat()
+    user_question = input("Ask a question: ")
+    result = ask_question_eval(user_question)
+    print("ANSWER:", result["answer"])
+    print("CONTEXT:", result["context"])
